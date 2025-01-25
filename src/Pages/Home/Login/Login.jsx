@@ -7,10 +7,17 @@ import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 const Login = (props) => {
     const { signInWithGoogle, signInUser } = useAuth();
     const [error, Seterror] = useState('');
+    const { user } = useAuth();
+    // console.log(user)
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from || '/';
+    const axiosPublic = useAxiosPublic();
     
     const {
         register,
@@ -21,18 +28,26 @@ const Login = (props) => {
     const onSubmit = (data) => {
         signInUser(data.email, data.password)
             .then(res => {
-                Seterror('')
-                Swal.fire({
-                position: 'center',
-                    title: "Signed In Successfully",
-                    text: "Welcome to GigFlow!",
-                    icon: "success",
-                    showConfirmButton: false,
-            })
+                
+                axiosPublic(`/userRole/${data?.email}`)
+                    .then(res => {
+                    navigate(location?.state?.from||`/dashboard/${res.data.role}/home`);
+                    Seterror('')
+                    // navigate(from);
+                    Swal.fire({
+                    position: 'center',
+                        title: "Signed In Successfully",
+                        text: "Welcome to GigFlow!",
+                        icon: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    })
+                })
+                
             })
             .catch(res => {
                 Seterror("invalid-credential.Please try Again");
-            console.log(res);
+            // console.log(res);
         })
     };
     // console.log(watch("password"));
@@ -40,22 +55,32 @@ const Login = (props) => {
         const handleGoogleLogin = () => {
             // Google Sign-In Code here
             signInWithGoogle().then((res) => {
-                Swal.fire({
-                    position: 'center',
-                    title: "Signed In Successfully",
-                    text: "Welcome to GigFlow!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 2000,
-                })
+                                axiosPublic(`/userRole/${res.user.email}`).then(
+                                    (res) => {
+                                        navigate(
+                                            location?.state?.from ||
+                                                `/dashboard/${res.data.role}/home`
+                                        );
+                                        Seterror("");
+                                        // navigate(from);
+                                        Swal.fire({
+                                            position: "center",
+                                            title: "Signed In Successfully",
+                                            text: "Welcome to GigFlow!",
+                                            icon: "success",
+                                            showConfirmButton: false,
+                                            timer: 2000,
+                                        });
+                                    }
+                                );
             });
         };
     return (
-        <div className="my-10 flex items-center flex-row-reverse">
-            <div className="w-[50%] ">
+        <div className="my-10 lg:flex items-center flex-row-reverse">
+            <div className="w-[50%] hidden lg:block">
                 <Lottie animationData={registerLogo} loop={true}></Lottie>
             </div>
-            <div className="card bg-base-100 items-center justify-center w-[50%] max-w-xl  shadow-xl">
+            <div className="card bg-base-100 items-center justify-center w-[90%] mx-auto lg:w-[50%] max-w-xl  shadow-xl">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="card-body w-full"

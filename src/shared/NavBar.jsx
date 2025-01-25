@@ -8,28 +8,22 @@ import Swal from "sweetalert2";
 import { FaCoins } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useUser from "../hooks/useUser";
 const NavBar = (props) => {
-    const [coin, Setcoin] = useState(0);
     const axiosPublic = useAxiosPublic();
     const { user, loading, signOutUser } = useAuth();
     // Show loading until the user data is available
+    const [data, refetch, isPending] = useUser();
+    // const [coin, setCoin] = useState(data?.coin);
+    
+    if (isPending || loading) {
+        return <p>loading....</p>
+    }
 
-    useEffect(() => {
-        if (!loading && user?.email) {
-            axiosPublic
-                .get(`/users/${user.email}`)
-                .then((response) => {
-                    Setcoin(response.data.coin);
-                })
-                .catch((error) => {
-                    console.error("Error fetching user data:", error);
-                });
-        }
-    }, [user?.email, axiosPublic]);
-    // const response = axiosPublic.get(`/users/${user.email}`).then(user => {
-    //     Setcoin(user.data.coin)
-    // })
-    // if (isPending) return "Loading...";
+
+    // console.log(data);
+    // Setcoin(data.coin)
+
 
     const links = user ? (
         <>
@@ -43,7 +37,7 @@ const NavBar = (props) => {
             </li>
             <li>
                 <NavLink
-                    to={"/dashboard"}
+                    to={`/dashboard/${data?.role}/home`}
                     className="font-semibold text-[#ff5851] text-[16px]"
                 >
                     DashBoard
@@ -51,28 +45,13 @@ const NavBar = (props) => {
             </li>
             <li>
                 <Link className="font-semibold text-[#ff5851] text-[16px] hello">
-                    <FaCoins></FaCoins>({coin})
+                    <FaCoins></FaCoins>({data?.coin})
                 </Link>
             </li>
         </>
     ) : (
         <>
-            <li>
-                <NavLink
-                    to={"/"}
-                    className="font-semibold text-[#ff5851] text-[16px]"
-                >
-                    Home
-                </NavLink>
-            </li>
-            <li>
-                <NavLink
-                    to={"/know"}
-                    className="font-semibold text-[#ff5851] text-[16px] hello"
-                >
-                    Item 3
-                </NavLink>
-            </li>
+            
         </>
     );
 
@@ -130,7 +109,7 @@ const NavBar = (props) => {
                 <div className="navbar-end gap-3">
                     <img
                         className="w-[40px] h-[40px] rounded-full"
-                        src={user.photoURL}
+                        src={data?.image}
                         alt=""
                     />
                     <button
@@ -139,7 +118,10 @@ const NavBar = (props) => {
                     >
                         Logout
                     </button>
-                    <a className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] ">
+                    <a
+                        href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-isagi299"
+                        className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] "
+                    >
                         Join as <br />
                         Developer{" "}
                     </a>

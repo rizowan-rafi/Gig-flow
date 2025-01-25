@@ -38,7 +38,8 @@ const Testimonial = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className="w-[90%] mx-auto">
+            <h1 className="text-3xl font-bold text-[#ff5851] mt-20">Testimonial</h1>
             <div className="py-5">
                 <Swiper
                     spaceBetween={30}

@@ -17,6 +17,7 @@ const Banner = (props) => {
                 stopOnHover={true}
                 className="cursor-pointer"
                 infiniteLoop={true}
+                showThumbs={false}
             >
                 <div className="md:flex items-center justify-center">
                     <div className="w-[90%] lg:w-[50%]">

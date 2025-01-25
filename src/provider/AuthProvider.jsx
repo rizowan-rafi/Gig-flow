@@ -10,12 +10,15 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosPublic=useAxiosPublic()
     // create user
     const createUser = (email, password) => {
         setLoading(true);
@@ -56,23 +59,14 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/auth.user
-                // const uid = user.uid;
-                // ...
                 setUser(user);
-                // updateProfile(auth.currentUser, {
-                //     displayName: user.displayName,
-                //     photoURL: user.photoURL,
-                // })
-                //     .then(() => {
-                //         // Profile updated!
-                //         // ...
-                //     })
-                //     .catch((error) => {
-                //         // An error occurred
-                //         // ...
-                //     });
+                const userInfo = { email: user.email };
+                axiosPublic.post("/jwt", userInfo).then((res) => {
+                    if (res.data.token) {
+                        localStorage.setItem("token", res.data.token);
+                    }
+                });
+
                 setLoading(false);
             } else {
                 // User is signed out

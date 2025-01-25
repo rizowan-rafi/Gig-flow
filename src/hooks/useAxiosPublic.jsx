@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 const axiosPublic = axios.create({
-    baseURL: "http://localhost:5000", // Public API endpoint
+    baseURL: "https://gig-flow-server.vercel.app", // Public API endpoint
 });
 const useAxiosPublic = (props) => {
     return axiosPublic;

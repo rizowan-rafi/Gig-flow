@@ -8,7 +8,7 @@ import { FaGoogle } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_Image_Upload_Token;
@@ -17,6 +17,7 @@ const SignUp = (props) => {
     const axiosPublic = useAxiosPublic();
     const [error, Seterror] = useState("");
     const { signInWithGoogle, createUser, updateUserProfile } = useAuth();
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -49,14 +50,17 @@ const SignUp = (props) => {
                             };
                             axiosPublic.post("/users", user).then((res) => {
                                 if (res.data.insertedId) {
-                                    Swal.fire({
-                                        position: "center",
-                                        title: "Account Created Successfully",
-                                        text: "Welcome to GigFlow!",
-                                        icon: "success",
-                                        showConfirmButton: false,
-                                        timer: 2000,
-                                    });
+                                    axiosPublic.get(`/userRole/${data?.email}`).then((res) => { 
+                                        navigate(`/dashboard/${res.data.role}/home`)
+                                        Swal.fire({
+                                            position: "center",
+                                            title: "Account Created Successfully",
+                                            text: "Welcome to GigFlow!",
+                                            icon: "success",
+                                            showConfirmButton: false,
+                                            timer: 2000,
+                                        });
+                                    })
                                 }
                             });
                         })
@@ -74,30 +78,18 @@ const SignUp = (props) => {
                     Seterror(
                         "email-already-in-use.please enter another valid email address"
                     );
-                    console.log(err);
+                    // console.log(err);
                 });
         }
     };
     // console.log(watch("password"));
-    const handleGoogleLogin = () => {
-        // Google Sign-In Code here
-        signInWithGoogle().then((res) => {
-            Swal.fire({
-                position: "center",
-                title: "Signed In Successfully",
-                text: "Welcome to GigFlow!",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 2000,
-            });
-        });
-    };
+
     return (
-        <div className="my-10 flex items-center flex-row-reverse">
-            <div className="w-[50%] ">
+        <div className="my-10 lg:flex items-center flex-row-reverse">
+            <div className="w-[50%] hidden lg:block">
                 <Lottie animationData={registerLogo} loop={true}></Lottie>
             </div>
-            <div className="card bg-base-100 items-center justify-center w-[50%] max-w-xl  shadow-xl">
+            <div className="card bg-base-100 items-center justify-center w-[90%] mx-auto lg:w-[50%] max-w-xl  shadow-xl">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="card-body w-full"
@@ -226,15 +218,7 @@ const SignUp = (props) => {
                         </Link>
                     </p>
                     {error && <p className="text-red-500  mt-4">{error}</p>}
-                    <div className="divider ">OR</div>
-                    <div>
-                        <button
-                            onClick={handleGoogleLogin}
-                            className="btn bg-[#ff5851] text-white"
-                        >
-                            <FaGoogle></FaGoogle> Google
-                        </button>
-                    </div>
+                    
                 </form>
             </div>
         </div>
