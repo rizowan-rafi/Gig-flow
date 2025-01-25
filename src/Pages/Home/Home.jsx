@@ -17,13 +17,13 @@ const Home = (props) => {
                 <BestWorker></BestWorker>
             </section>
             <section>
-                 <Acknowledge></Acknowledge>
+                <Acknowledge></Acknowledge>
             </section>
             <section>
-                <Faq></Faq>
+                 <Faq></Faq>
             </section>
             <section>
-                <Testimonial></Testimonial>
+                 <Testimonial></Testimonial>
             </section>
             <section>
                 <Ad></Ad>
