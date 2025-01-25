@@ -14,7 +14,7 @@ const Home = (props) => {
                 <Banner></Banner>
             </section>
             <section>
-                <BestWorker></BestWorker>
+                 <BestWorker></BestWorker>
             </section>
             <section>
                 <Acknowledge></Acknowledge>
