@@ -11,13 +11,13 @@ const Home = (props) => {
     return (
         <div>
             <section>
-                 <Banner></Banner>
+                <Banner></Banner>
             </section>
             <section>
                 <BestWorker></BestWorker>
             </section>
             <section>
-                <Acknowledge></Acknowledge>
+                 <Acknowledge></Acknowledge>
             </section>
             <section>
                 <Faq></Faq>
