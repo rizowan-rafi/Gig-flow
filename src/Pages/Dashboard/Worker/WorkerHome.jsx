@@ -10,7 +10,7 @@ const WorkerHome = (props) => {
     const [taskPendingCount, setTaskPendingCount] = useState(0);
     const [totalEarn, setTotalEarn] = useState();
     const [taskApprovedCount, setTaskApprovedCount] = useState([]);
-    const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
     useEffect(() => {
         const taskC = async () => { 
