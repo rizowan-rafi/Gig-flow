@@ -29,7 +29,7 @@ const Footer = (props) => {
                         <FaFacebookSquare></FaFacebookSquare>
                     </a>
                     <a
-                        href="mailto:rizowanrafi71@gmail.com"
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=rizowanrafi71@gmail.com"
                         className="text-2xl text-white"
                     >
                         <BiLogoGmail />
