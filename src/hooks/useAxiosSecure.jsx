@@ -13,7 +13,10 @@ const useAxiosSecure = (props) => {
         function (config) {
             const token = localStorage.getItem("token");
             // console.log(config, token)
-            config.headers.authorization = "Bearer " + token;
+            if (token) {
+                
+                config.headers.authorization = "Bearer " + token;
+            }
             return config;
         },
         function (err) {
@@ -26,6 +29,8 @@ const useAxiosSecure = (props) => {
             return response;
         },
         async function (err) {
+            await new Promise((resolve) => setTimeout(resolve, 2000)); 
+    
             const status = err.response.status;
             if (status === 401 || status === 403 || status === 400) {
                 // localStorage.removeItem('token');
