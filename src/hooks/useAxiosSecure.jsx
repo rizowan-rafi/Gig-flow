@@ -36,7 +36,7 @@ const useAxiosSecure = (props) => {
                 // localStorage.removeItem('token');
                 // window.location.href = '/login';
                 await signOutUser();
-                navigate("/login");
+                navigate("/login")
             }
             // console.log('status error', err.response.status);
             return Promise.reject(err);
