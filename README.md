@@ -1,8 +1,33 @@
-# React + Vite
+# Micro-Task and Earning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Admin Credentials
+- **Username:** admin@example.com
+- **Password:** admin123
 
-Currently, two official plugins are available:
+## Live Site URL
+[Micro-Task and Earning Platform](https://your-live-site-url.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
+The **Micro-Task and Earning Platform** is a web application that allows users to complete small tasks and earn money. It provides a seamless experience for Workers, Buyers, and Admins to manage tasks, earnings, and platform operations.
+
+## Features
+1. **User Roles:** Supports three distinct roles – Worker, Buyer, and Admin with different functionalities.
+2. **Task Management:** Buyers can create, review, and approve tasks, while Workers can complete and submit tasks.
+3. **Secure Authentication:** Users can register and log in using email/password or Google authentication.
+4. **Coin System:** Workers earn coins for completing tasks, which can be withdrawn once they accumulate enough.
+5. **Admin Dashboard:** Admins can manage users, tasks, and withdrawal requests efficiently.
+6. **Responsive Design:** Fully optimized for mobile, tablet, and desktop views.
+7. **Payment Integration:** Stripe payment gateway for buying coins.
+8. **Notification System:** Users receive real-time notifications for task approvals, rejections, and payments.
+9. **Pagination & Filtering:** Efficient pagination and filtering options for better task management.
+10. **Secure Authorization:** Role-based access control to ensure secure data handling.
+
+## Technology Stack
+- **Frontend:** React.js, Tailwind CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** Firebase, JWT
+- **Hosting:** Vercel (Backend), Firebase (Frontend),
+- **Payment Gateway:** Stripe
+
+
