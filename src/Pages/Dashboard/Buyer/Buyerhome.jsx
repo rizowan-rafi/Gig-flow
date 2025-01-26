@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { FcViewDetails } from "react-icons/fc";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth"
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
