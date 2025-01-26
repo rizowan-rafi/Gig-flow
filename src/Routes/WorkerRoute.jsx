@@ -14,7 +14,7 @@ const WorkerRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate to={"/"} state={location?.pathname}></Navigate>;
+    return <Navigate to={"/"} state={location?.pathname}></Navigate>
 };
 
 WorkerRoute.propTypes = {};
