@@ -1,11 +1,9 @@
 # Micro-Task and Earning Platform
 
-## Admin Credentials
-- **Username:** admin@example.com
-- **Password:** admin123
+
 
 ## Live Site URL
-[Micro-Task and Earning Platform](https://your-live-site-url.com)
+[Micro-Task and Earning Platform](https://gigflow-client.web.app/)
 
 ## Project Overview
 The **Micro-Task and Earning Platform** is a web application that allows users to complete small tasks and earn money. It provides a seamless experience for Workers, Buyers, and Admins to manage tasks, earnings, and platform operations.
