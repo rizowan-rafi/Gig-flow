@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
-import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdminHome = (props) => {
