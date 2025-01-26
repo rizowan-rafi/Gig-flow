@@ -22,13 +22,22 @@ const Footer = (props) => {
             <nav>
                 <h6 className="footer-title text-white">Social</h6>
                 <div className="grid grid-flow-col gap-4">
-                    <a href="" className="text-2xl text-white">
+                    <a
+                        href="https://web.facebook.com/profile.php?id=100086192710600"
+                        className="text-2xl text-white"
+                    >
                         <FaFacebookSquare></FaFacebookSquare>
                     </a>
-                    <a href="" className="text-2xl text-white">
+                    <a
+                        href="mailto:rizowanrafi71@gmail.com"
+                        className="text-2xl text-white"
+                    >
                         <BiLogoGmail />
                     </a>
-                    <a href="" className="text-2xl text-white">
+                    <a
+                        href="https://github.com/isagi299"
+                        className="text-2xl text-white"
+                    >
                         <FaGithubSquare></FaGithubSquare>
                     </a>
                 </div>
