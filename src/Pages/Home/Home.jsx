@@ -6,6 +6,8 @@ import BestWorker from "./BestWorker";
 import Acknowledge from "./Acknowledge";
 import Faq from "./Faq";
 import Ad from "./Ad";
+import Newsletter from "./Newsletter";
+import Blog from "./Blog";
 
 const Home = (props) => {
     return (
@@ -19,11 +21,17 @@ const Home = (props) => {
             <section>
                 <Acknowledge></Acknowledge>
             </section>
-            <section>
+            <section id="faq">
                 <Faq></Faq>
             </section>
-            <section>
+            <section id="test">
                 <Testimonial></Testimonial>
+            </section>
+            <section>
+                <Newsletter></Newsletter>
+            </section>
+            <section>
+                <Blog></Blog>
             </section>
             <section>
                 <Ad></Ad>

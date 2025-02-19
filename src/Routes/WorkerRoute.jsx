@@ -7,7 +7,11 @@ const WorkerRoute = ({ children }) => {
     const [isWorker, isWorkerPending] = useWorker();
     const location = useLocation();
     if (loading || isWorkerPending) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg  text-success"></span>
+            </div>
+        );
     }
 
     if (user && isWorker) {

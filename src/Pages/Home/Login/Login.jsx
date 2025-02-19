@@ -9,6 +9,7 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { FaHandHoldingDollar } from "react-icons/fa6";
 const Login = (props) => {
     const { signInWithGoogle, signInUser } = useAuth();
     const [error, Seterror] = useState('');
@@ -76,29 +77,32 @@ const Login = (props) => {
             });
         };
     return (
-        <div className="my-10 lg:flex items-center flex-row-reverse">
-            <div className="w-[50%] hidden lg:block">
+        <div className="py-10 lg:flex items-center flex-row-reverse bg-background dark:text-background dark:bg-text">
+            <div className="w-[50%] hidden lg:block ">
                 <Lottie animationData={registerLogo} loop={true}></Lottie>
             </div>
-            <div className="card bg-base-100 items-center justify-center w-[90%] mx-auto lg:w-[50%] max-w-xl  shadow-xl">
+            <div className="card  items-center justify-center w-[90%] mx-auto lg:w-[50%] max-w-xl  shadow-xl">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="card-body w-full"
+                    className="card-body w-full "
                 >
-                    <img className="w-[75px]" src={logo} alt="" />
+                    <span className="text-primary text-5xl">
+                        <FaHandHoldingDollar></FaHandHoldingDollar>
+                    </span>
                     <h3 className="text-2xl font-bold">
-                        <span className="text-[#ff5851]">Login</span> Your
-                        Account
+                        <span className="text-primary">Login</span> Your Account
                     </h3>
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text dark:text-background">
+                                Email
+                            </span>
                         </label>
                         <input
                             type="email"
                             placeholder="Input A Valid Email"
-                            className="input input-bordered"
+                            className="input input-bordered dark:text-green-500"
                             {...register("email", { required: true })}
                             required
                         />
@@ -111,12 +115,14 @@ const Login = (props) => {
 
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="label-text dark:text-background">
+                                Password
+                            </span>
                         </label>
                         <input
                             type="password"
                             placeholder="Input Password"
-                            className="input input-bordered"
+                            className="input input-bordered dark:text-green-500"
                             required
                             {...register("password", {
                                 required: true,
@@ -125,20 +131,25 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-control mt-6">
-                        <button className="btn  bg-[#ff5851] text-white">
+                        <button className="btn  bg-primary text-white">
                             Login
                         </button>
                     </div>
                     <p>
                         Doesn't Have Account?{" "}
-                        <Link to={'/register'} className="text-[#ff5851] font-semibold text-[16px]">SignUp</Link>
+                        <Link
+                            to={"/register"}
+                            className="text-primary font-semibold text-[16px]"
+                        >
+                            SignUp
+                        </Link>
                     </p>
                     {error && <p className="text-red-500">{error}</p>}
                     <div className="divider ">OR</div>
                     <div>
                         <button
                             onClick={handleGoogleLogin}
-                            className="btn bg-[#ff5851] text-white"
+                            className="btn bg-primary text-white"
                         >
                             <FaGoogle></FaGoogle> Google
                         </button>

@@ -2,13 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Faq = (props) => {
+    // Got Questions? We've Got Answers – Your Guide to Earning & Buying!
     return (
-        <div className="w-[90%] mx-auto">
-            <h1 className="text-3xl font-bold text-[#ff5851] mt-20 mb-10">
-                FAQ
-            </h1>
+        <div className="px-10 pb-20 bg-background dark:bg-text">
+            <div className="mb-5 dark:text-background">
+                <h1 className="text-3xl text-primary font-semibold  text-center">
+                    Frequent Ask Question
+                </h1>
+                <p className="text-center text-xl lg:w-1/3  mx-auto">
+                    Got Questions? We've Got Answers – Your Guide to Earning &
+                    Buying!
+                </p>
+            </div>
+
             <div className="space-y-2">
-                <div className="collapse collapse-plus  bg-[#ff5851]">
+                <div className="collapse collapse-plus  bg-primary">
                     <input type="radio" name="my-accordion-3" defaultChecked />
                     <div className="collapse-title text-white font-bold text-xl ">
                         How do I sign up and start earning?
@@ -22,7 +30,7 @@ const Faq = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="collapse collapse-plus bg-[#ff5851]">
+                <div className="collapse collapse-plus bg-primary">
                     <input type="radio" name="my-accordion-3" />
                     <div className="collapse-title text-xl font-bold text-white">
                         Is there a minimum payout limit?
@@ -35,7 +43,7 @@ const Faq = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="collapse collapse-plus bg-[#ff5851]">
+                <div className="collapse collapse-plus bg-primary">
                     <input type="radio" name="my-accordion-3" />
                     <div className="collapse-title text-xl font-bold text-white">
                         How can I create a task for workers?
@@ -52,7 +60,7 @@ const Faq = (props) => {
                         </p>
                     </div>
                 </div>
-                <div className="collapse collapse-plus bg-[#ff5851]">
+                <div className="collapse collapse-plus bg-primary">
                     <input type="radio" name="my-accordion-3" />
                     <div className="collapse-title text-xl font-bold text-white">
                         How do I withdraw my earnings?

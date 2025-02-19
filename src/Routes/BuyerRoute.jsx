@@ -7,7 +7,11 @@ const BuyerRoute = ({ children }) => {
     const [isBuyer, isBuyerPending] = useBuyer();
     const location = useLocation();
     if (loading || isBuyerPending) {
-        return <div>Loading...</div>;
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg  text-success"></span>
+            </div>
+        );
     }
 
     if (user && isBuyer) {

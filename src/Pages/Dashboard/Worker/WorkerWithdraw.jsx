@@ -65,7 +65,7 @@ const WorkerWithdraw = (props) => {
     // console.log(data?.email);
     const money = Math.round(parseInt(data?.coin / 20));
     return (
-        <div className="p-5">
+        <div className="p-5 text-text dark:text-background">
             <p className="text-xl font-semibold">Current Coin :{data?.coin}</p>
             <p className="text-xl font-semibold">
                 Current Withdrawal Amount :
@@ -76,38 +76,38 @@ const WorkerWithdraw = (props) => {
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Insert Coin</span>
+                        <span className="label-text dark:text-background">Insert Coin</span>
                     </label>
                     <input
                         type="number"
                         ref={coinRef}
                         placeholder="Number of coin to withdraw"
-                        className="input input-bordered"
+                        className="input input-bordered text-text"
                         {...register("coinAmount")}
                         required
                     />
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Money$</span>
+                        <span className="label-text dark:text-background">Money$</span>
                     </label>
                     <input
                         type="number"
                         value={coinMoney}
                         readOnly={true}
-                        className="input input-bordered"
+                        className="input input-bordered text-text"
                         {...register("moneyAmount")}
                         required
                     />
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Payment System</span>
+                        <span className="label-text dark:text-background">Payment System</span>
                     </label>
             <select
                 defaultValue={""}
                 {...register("paymentMethod", { required: true })}
-                className="select select-bordered w-full max-w-xs"
+                className="select select-bordered w-full max-w-xs text-text"
             >
                 <option value="" disabled>
                     Select Payment Method
@@ -120,21 +120,21 @@ const WorkerWithdraw = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Account Number</span>
+                        <span className="label-text dark:text-background">Account Number</span>
                     </label>
                     <input
                         type="text"
                         placeholder="Account Number"
-                        className="input input-bordered"
+                        className="input input-bordered text-text"
                         {...register("accountNumber")}
                         required
                     />
                 </div>
                 <div className="form-control mt-6">
                     {data?.coin >= 200 && parseInt(coin)>=200 ? (
-                        <button className="btn btn-primary">Withdraw Money</button>
+                        <button className="btn bg-primary text-background">Withdraw Money</button>
                     ) : (
-                        <button className="btn-disabled btn">Insufficient coin</button>
+                        <button className="btn-disabled btn dark:bg-secondary dark:text-background">Insufficient coin</button>
                     )}
                 </div>
             </form>

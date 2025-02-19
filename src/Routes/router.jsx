@@ -24,6 +24,9 @@ import BuyerTaskUpdate from "../Pages/Dashboard/Buyer/BuyerTaskUpdate";
 import AdminRoute from "./AdminRoute";
 import BuyerRoute from "./BuyerRoute";
 import WorkerRoute from "./WorkerRoute";
+import Profile from "../shared/Profile";
+import AllTasks from "../Pages/Home/AllTasks";
+import OverView from "../shared/OverView";
 
 
 const router = createBrowserRouter([
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <Login></Login>,
             },
+            {
+                path: "/alltasks",
+                element: <AllTasks></AllTasks>,
+            },
         ],
     },
     // Add your other routes here
@@ -62,6 +69,14 @@ const router = createBrowserRouter([
                 element: (
                     <BuyerRoute>
                         <Buyerhome></Buyerhome>
+                    </BuyerRoute>
+                ),
+            },
+            {
+                path: "/dashboard/Buyer/profile",
+                element: (
+                    <BuyerRoute>
+                        <Profile></Profile>
                     </BuyerRoute>
                 ),
             },
@@ -122,6 +137,14 @@ const router = createBrowserRouter([
                 ),
             },
             {
+                path: "/dashboard/Worker/profile",
+                element: (
+                    <WorkerRoute>
+                        <Profile></Profile>
+                    </WorkerRoute>
+                ),
+            },
+            {
                 path: "/dashboard/Worker/taskList",
                 element: (
                     <WorkerRoute>
@@ -162,6 +185,14 @@ const router = createBrowserRouter([
                 ),
             },
             {
+                path: "/dashboard/Admin/profile",
+                element: (
+                    <AdminRoute>
+                        <Profile></Profile>
+                    </AdminRoute>
+                ),
+            },
+            {
                 path: "/dashboard/Admin/users",
                 element: (
                     <AdminRoute>
@@ -175,6 +206,14 @@ const router = createBrowserRouter([
                     <AdminRoute>
                         <AdminTask></AdminTask>
                     </AdminRoute>
+                ),
+            },
+            {
+                path: "/dashboard/overview",
+                element: (
+                    <PrivateRoute>
+                        <OverView></OverView>
+                    </PrivateRoute>
                 ),
             },
         ],

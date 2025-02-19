@@ -67,7 +67,7 @@ const TaskDetail = (props) => {
 
     return (
         <div className="flex p-5 space-x-4">
-            <div className="w-1/2 p-5 bg-[#ff5051] rounded-xl">
+            <div className="w-1/2 p-5 bg-primary rounded-xl">
                 <h1 className="text-xl font-semibold text-white">Task Detail: {task.title}</h1>
                 <p className="text-xl font-semibold text-white">Description: {task.detail}</p>
                 <p className="text-xl font-semibold text-white">Buyer email: {task.buyer_email}</p>
@@ -80,7 +80,7 @@ const TaskDetail = (props) => {
                 <form onSubmit={handleSubmit} className="card-body w-full">
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text text-xl mb-3">
+                            <span className="label-text text-xl mb-3 text-primary">
                                 submission_Details.
                             </span>
                         </label>
@@ -92,7 +92,7 @@ const TaskDetail = (props) => {
                     </div>
 
                     <div className="form-control mt-6">
-                        <button className="btn  bg-[#ff5851] text-white">Submission</button>
+                        <button className="btn  bg-primary text-white">Submission</button>
                     </div>
                 </form>
             </div>

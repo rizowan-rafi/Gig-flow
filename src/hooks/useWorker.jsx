@@ -13,7 +13,7 @@ const useWorker = (props) => {
         queryKey: [user?.email, "buyer"],
         queryFn: async () => {
             const response = await axiosSecure.get(
-                `/checkWorker/${user.email}`
+                `/checkWorker/${user?.email}`
             );
             // console.log(response.data)
             return response.data;

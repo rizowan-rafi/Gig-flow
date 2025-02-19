@@ -9,6 +9,7 @@ const AdminHome = (props) => {
     const [buyerCount, setBuyerCount] = useState(0);
     const [coinCount, setCoinCount] = useState(0);
     const [paymentCount, setPaymentCount] = useState(0);
+    const [loading, setLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         const fetchWithdrawals = async () => {
@@ -26,12 +27,20 @@ const AdminHome = (props) => {
 
                 const payment = await axiosSecure.get("/totalPayment");
                 setPaymentCount(payment.data.total);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching withdrawals:", error);
             }
         };
         fetchWithdrawals();
     }, []);
+    if (loading) {
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg  text-success"></span>
+            </div>
+        );
+    }
 
     const handleWithdraw = async (id, email, wcoin, wstatus, name) => {
         // console.log(id, email);
@@ -66,7 +75,7 @@ const AdminHome = (props) => {
                 formEmail: "Admin@gmail.com",
                 time: new Date().toISOString().split("T")[0],
                 message: `Withdrawal request approved for ${name} by Admin`,
-                actionRoute: '/dashboard/Worker/home'
+                actionRoute: "/dashboard/Worker/home",
             };
             const res = await axiosSecure.post("/notifications", note);
             if (res.data.insertedId) {
@@ -83,7 +92,7 @@ const AdminHome = (props) => {
     // console.log(withdraw);
     return (
         <div>
-            <div className="flex w-full justify-center items-center mt-5">
+            <div className="flex w-[80%] lg:w-full mx-auto justify-center items-center mt-5">
                 <div className="stats justify-center items-center place-items-center  w-full lg:w-3/4  stats-vertical lg:stats-horizontal shadow">
                     <div className="stat">
                         <div className="stat-title">Total Worker</div>
@@ -112,30 +121,46 @@ const AdminHome = (props) => {
 
             <div>
                 <div className="overflow-x-auto">
-                    <table className="table table-md">
+                    <table className="table table-md dark:text-background">
                         {/* head */}
                         <thead>
-                            <tr>
-                                <th></th>
+                            <tr className="dark:text-background">
+                                <th className="hidden lg:table-cell"></th>
                                 <th>Worker Name</th>
-                                <th>Worker Email</th>
-                                <th>Withdraw Coin</th>
+                                <th className="hidden lg:table-cell">
+                                    Worker Email
+                                </th>
+                                <th className="hidden lg:table-cell">
+                                    Withdraw Coin
+                                </th>
                                 <th>Withdraw Money</th>
-                                <th>Withdraw Date</th>
-                                <th>Status</th>
+                                <th className="hidden lg:table-cell">
+                                    Withdraw Date
+                                </th>
+                                <th className="hidden lg:table-cell">Status</th>
                                 <th>Approval</th>
                             </tr>
                         </thead>
                         <tbody>
                             {withdraw.map((w, index) => (
                                 <tr key={w._id}>
-                                    <th>{index + 1}</th>
+                                    <th className="hidden lg:table-cell">
+                                        {index + 1}
+                                    </th>
                                     <td>{w.worker_name}</td>
-                                    <td>{w.worker_email}</td>
-                                    <td>{w.withdrawal_coin}</td>
+                                    <td className="hidden lg:table-cell">
+                                        {w.worker_email}
+                                    </td>
+                                    <td className="hidden lg:table-cell">
+                                        {w.withdrawal_coin}
+                                    </td>
                                     <td>{w.withdrawal_amount}</td>
-                                    <td>{w.withdraw_date}</td>
-                                    <td>{w.status}</td>
+                                    <td className="hidden lg:table-cell">
+                                        {w.withdraw_date}
+                                    </td>
+                                    <td className="hidden lg:table-cell">
+                                        {w.status}
+                                    </td>
                                     <td>
                                         <button
                                             onClick={() =>

@@ -8,6 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Buyerhome = (props) => {
     const { user } = useAuth();
+    const [loading, setLoading] = useState(true);
     const [taskNumbers, setTaskNumbers] = useState(0);
     const [totalWorkers, setTotalWorkers] = useState(0);
     const [totalPayment, setTotalPayment] = useState(0);
@@ -30,8 +31,17 @@ const Buyerhome = (props) => {
                 (t) => t.status === "pending"
             );
             setTotalSubmission(updateSubmission);
+            setLoading(false);
         });
     }, []);
+
+       if (loading) {
+           return (
+               <div className="h-screen w-screen flex justify-center items-center">
+                   <span className="loading loading-spinner loading-lg  text-success"></span>
+               </div>
+           );
+       }
 
     const handleApproval = async (id, wemail, wcoin1, s,ss) => {
         const status = await axiosSecure.patch(`/submissionStatus/${id}`, {
@@ -109,10 +119,10 @@ const Buyerhome = (props) => {
     return (
         <div className="">
             {/* state */}
-            <div className="flex w-3/4 lg:w-full mx-auto justify-center items-center mt-5">
-                <div className="stats justify-center items-center place-items-center  w-full lg:w-3/4   stats-vertical lg:stats-horizontal shadow">
+            <div className="flex  w-3/4 lg:w-full mx-auto justify-center items-center mt-5">
+                <div className="stats justify-center bg-secondary  items-center place-items-center  w-full lg:w-3/4   stats-vertical lg:stats-horizontal shadow">
                     <div className="stat">
-                        <div className="stat-title">total task</div>
+                        <div className="stat-title  ">total task</div>
                         <div className="stat-value">{taskNumbers}</div>
                         {/* <div className="stat-desc">Jan 1st - Feb 1st</div> */}
                     </div>
@@ -135,7 +145,7 @@ const Buyerhome = (props) => {
                 <div className="overflow-x-auto w-full mt-10">
                     <table className="table w-full">
                         {/* head */}
-                        <thead>
+                        <thead className="text-text dark:text-background">
                             <tr>
                                 <th></th>
                                 <th className="hidden lg:table-cell">

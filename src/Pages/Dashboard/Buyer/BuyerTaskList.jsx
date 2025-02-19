@@ -9,17 +9,26 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const BuyerTaskList = (props) => {
     const { user } = useAuth();
     const [tasks, setTasks] = useState(null);
+    const [loading, setLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
     useEffect(() => {
         axiosSecure
             .get(`/tasks/${user?.email}`)
             .then((response) => {
                 setTasks(response.data);
+                setLoading(false);
             })
             .catch((error) => {
                 // console.log(error);
             });
     }, []);
+    if (loading) {
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg  text-success"></span>
+            </div>
+        );
+    }
 
     // console.log(tasks);
     const handleUpdate = async (e, id, title1, tdetail, sdetail) => {
@@ -36,7 +45,6 @@ const BuyerTaskList = (props) => {
             updateTask
         );
         if (taskUpdate.data.modifiedCount) {
-            
             Swal.fire({
                 title: "Task Updated Successfully",
                 text: "Task updated successfully!",
@@ -49,7 +57,7 @@ const BuyerTaskList = (props) => {
         }
     };
 
-    const handleDelete = async (id, worker, payment,title,email) => {
+    const handleDelete = async (id, worker, payment, title, email) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -64,15 +72,17 @@ const BuyerTaskList = (props) => {
 
                 const res = await axiosSecure.delete(`/taskDelete/${id}`);
                 if (res.data.deletedCount) {
-                    const sdata = await axiosSecure.get(`/TaskSubmit/${title}`)
+                    const sdata = await axiosSecure.get(`/TaskSubmit/${title}`);
                     // console.log(sdata.data.status)
-                    if (sdata.data.status !== 'approved' || sdata.data.status===undefined) {
+                    if (
+                        sdata.data.status !== "approved" ||
+                        sdata.data.status === undefined
+                    ) {
                         const sUser = await axiosSecure.get(`/users/${email}`);
                         const coin = await axiosSecure.patch(`/coins`, {
                             email: email,
                             coin: sUser.data.coin + countCoin,
                         });
-                        
                     }
                     Swal.fire({
                         title: "Task deleted Successfully",
@@ -89,17 +99,25 @@ const BuyerTaskList = (props) => {
     return (
         <div>
             <div className="overflow-x-auto">
-                <table className="table ">
+                <table className="table text-text dark:text-background">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className="dark:text-background text-text">
                             <th className="hidden lg:table-cell"></th>
                             <th>Title</th>
-                            <th className="hidden lg:table-cell">Task Detail</th>
-                            <th className="hidden lg:table-cell">Submission Info</th>
-                            
-                            <th className="hidden lg:table-cell">payment(each)</th>
-                            <th className="hidden lg:table-cell">required worker</th>
+                            <th className="hidden lg:table-cell">
+                                Task Detail
+                            </th>
+                            <th className="hidden lg:table-cell">
+                                Submission Info
+                            </th>
+
+                            <th className="hidden lg:table-cell">
+                                payment(each)
+                            </th>
+                            <th className="hidden lg:table-cell">
+                                required worker
+                            </th>
                             <th className="hidden lg:table-cell">deadline</th>
                             <th>Update</th>
                             <th>Delete</th>
@@ -108,14 +126,26 @@ const BuyerTaskList = (props) => {
                     <tbody>
                         {tasks?.map((task, idx) => (
                             <tr key={task._id}>
-                                <th className="hidden lg:table-cell">{idx + 1}</th>
+                                <th className="hidden lg:table-cell">
+                                    {idx + 1}
+                                </th>
                                 <td>{task.title}</td>
-                                <td className="hidden lg:table-cell">{task.detail}</td>
-                                <td className="hidden lg:table-cell">{task.submitInfo}</td>
-                                
-                                <td className="hidden lg:table-cell">{task.payment}</td>
-                                <td className="hidden lg:table-cell">{task.required_worker}</td>
-                                <td className="hidden lg:table-cell">{task.deadline}</td>
+                                <td className="hidden lg:table-cell">
+                                    {task.detail}
+                                </td>
+                                <td className="hidden lg:table-cell">
+                                    {task.submitInfo}
+                                </td>
+
+                                <td className="hidden lg:table-cell">
+                                    {task.payment}
+                                </td>
+                                <td className="hidden lg:table-cell">
+                                    {task.required_worker}
+                                </td>
+                                <td className="hidden lg:table-cell">
+                                    {task.deadline}
+                                </td>
                                 <td
                                     onClick={() =>
                                         document

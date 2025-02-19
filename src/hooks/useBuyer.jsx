@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosPublic from "./useAxiosPublic";
-import useAxiosSecure, { axiosSecure } from "./useAxiosSecure";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useBuyer = (props) => {
     const { user } = useAuth();
@@ -12,7 +12,7 @@ const useBuyer = (props) => {
     const { data: isBuyer, isPending: isBuyerPending } = useQuery({
         queryKey: [user?.email, "buyer"],
         queryFn: async () => {
-            const response = await axiosSecure.get(`/checkBuyer/${user.email}`);
+            const response = await axiosSecure.get(`/checkBuyer/${user?.email}`);
             // console.log(response.data)
             return response.data;
         },

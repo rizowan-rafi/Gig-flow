@@ -14,23 +14,32 @@ const BestWorker = (props) => {
             );
     }, []);
     return (
-        <div className="my-20 w-[90%] mx-auto">
-            <h1 className="text-4xl font-semibold pb-5 text-[#ff5851]">
-                Best Worker
-            </h1>
-            <div className="grid grid-cols-3">
+        <div className="py-20 px-10 bg-background dark:bg-text">
+            <div className="mb-5">
+                <p className="text-4xl font-semibold text-primary text-center">
+                    Best Worker
+                </p>
+                <p className="text-center text-xl lg:w-1/4 mx-auto dark:text-background">
+                    Strive for the top and join the ranks of our best-performing
+                    members!
+                </p>
+            </div>
+            <div className="grid lg:grid-cols-3 gap-5">
                 {topWorker.map((worker) => (
-                    <div className="card card-compact p-5 w-96 shadow-md">
+                    <div className="card card-compact p-5  shadow-md bg-secondary dark:bg-accent text-text">
                         <figure>
                             <img src={worker.image} alt="Shoes" />
                         </figure>
                         <div className="card-body">
-                            <h2 className="card-title text-2xl">
+                            <h2 className="card-title text-2xl dark:text-background">
                                 {worker.name}
                             </h2>
-                            <p className="text-xl">
+                            <h2 className="card-title text-xl dark:text-background">
+                                Email: {worker.email}
+                            </h2>
+                            <p className="text-xl dark:text-background">
                                 Coin :{" "}
-                                <span className="font-semibold text-[#ff5851]">
+                                <span className="font-semibold text-primary">
                                     {worker.coin}
                                 </span>
                             </p>

@@ -11,8 +11,8 @@ const Checkout = props => {
       const coins = location.state?.coins || 0;
     return (
         <div className='w-[90%]'>
-            <h1 className='text-3xl font-bold text-[#ff5851] p-5'>Payment: { coins}$</h1>
-            <p className='mb-3 font-semibold'>Pay using credit card</p>
+            <h1 className='text-3xl font-bold text-primary p-5'>Payment: { coins}$</h1>
+            <p className='mb-3 font-semibold text-xl dark:text-background'>Pay using credit card</p>
             <Elements stripe={stripePromise}>
                 <CheckoutForm coin={coins}></CheckoutForm>
             </Elements>

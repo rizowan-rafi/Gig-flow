@@ -9,16 +9,16 @@ import Footer from "../shared/Footer";
 const DashBoard = (props) => {
     const [data, isPending, error] = useUser();
     // console.log(data?.coin);
-    
+
     return (
-        <div>
+        <div className="bg-background">
             <nav className="">
                 <DashNav></DashNav>
             </nav>
-            <main className="flex gap-10">
-                <aside>
-                    <div className="sidebar-menu">
-                        <div className="drawer lg:drawer-open">
+            <main className="flex gap-10 dark:bg-text">
+                <aside className="z-10">
+                    <div className="sidebar-menu ">
+                        <div className="drawer lg:drawer-open ">
                             <input
                                 id="my-drawer-2"
                                 type="checkbox"
@@ -33,18 +33,20 @@ const DashBoard = (props) => {
                                     <IoIosMenu></IoIosMenu>
                                 </label>
                             </div>
-                            <div className="drawer-side top-16">
+                            <div className="drawer-side top-16 ">
                                 <label
                                     htmlFor="my-drawer-2"
                                     aria-label="close sidebar"
-                                    className="drawer-overlay"
+                                    className="drawer-overlay "
                                 ></label>
 
                                 {data?.role === "Buyer" ? (
-                                    <ul className="menu bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
+                                    <ul className="menu dark:bg-text  text-base-content   min-h-full lg:w-52 p-4">
                                         {/* Sidebar content here */}
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/home`}
                                             >
                                                 Home
@@ -52,6 +54,26 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/overview`}
+                                            >
+                                                Overview
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/${data?.role}/profile`}
+                                            >
+                                                Profile
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/AddTask`}
                                             >
                                                 Add new Tasks
@@ -59,6 +81,8 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/TaskLists`}
                                             >
                                                 My Task’s{" "}
@@ -66,6 +90,8 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/Checkout`}
                                             >
                                                 Purchase Coin{" "}
@@ -73,6 +99,8 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/PaymentHistory`}
                                             >
                                                 Payment history{" "}
@@ -80,10 +108,12 @@ const DashBoard = (props) => {
                                         </li>
                                     </ul>
                                 ) : data?.role === "Worker" ? (
-                                    <ul className="menu bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
+                                    <ul className="menu dark:bg-text bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
                                         {/* Sidebar content here */}
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/home`}
                                             >
                                                 Home
@@ -91,6 +121,26 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/overview`}
+                                            >
+                                                Overview
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/${data?.role}/profile`}
+                                            >
+                                                Profile
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/taskList`}
                                             >
                                                 TaskLists
@@ -98,6 +148,8 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/${data?.role}/submission`}
                                             >
                                                 My Submissions{" "}
@@ -105,6 +157,8 @@ const DashBoard = (props) => {
                                         </li>
                                         <li>
                                             <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
                                                 to={`/dashboard/Worker/withdraws`}
                                             >
                                                 withdrawals
@@ -112,20 +166,50 @@ const DashBoard = (props) => {
                                         </li>
                                     </ul>
                                 ) : data?.role === "Admin" ? (
-                                    <ul className="menu bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
+                                    <ul className="menu dark:bg-text bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
                                         {/* Sidebar content here */}
                                         <li>
-                                            <NavLink to={"/dashboard/Admin/home"}>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={"/dashboard/Admin/home"}
+                                            >
                                                 Home
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to={"/dashboard/Admin/users"}>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/overview`}
+                                            >
+                                                Overview
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={`/dashboard/${data?.role}/profile`}
+                                            >
+                                                Profile
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={"/dashboard/Admin/users"}
+                                            >
                                                 Manage User
                                             </NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to={"/dashboard/Admin/tasks"}>
+                                            <NavLink
+                                                className="hover:font-semibold text-primary hover:bg-primary
+                    hover:text-teal-50 text-[16px]"
+                                                to={"/dashboard/Admin/tasks"}
+                                            >
                                                 Manage Task
                                             </NavLink>
                                         </li>
@@ -135,7 +219,7 @@ const DashBoard = (props) => {
                         </div>
                     </div>
                 </aside>
-                <aside className="flex-1">
+                <aside className="flex-1 dark:bg-text">
                     <Outlet></Outlet>
                 </aside>
             </main>

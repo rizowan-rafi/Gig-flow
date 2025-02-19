@@ -11,6 +11,7 @@ const WorkerHome = (props) => {
     const [totalEarn, setTotalEarn] = useState();
     const [taskApprovedCount, setTaskApprovedCount] = useState([]);
     const axiosSecure = useAxiosSecure()
+    const [loading, setLoading] = useState(true);
     const { user } = useAuth();
     useEffect(() => {
         const taskC = async () => { 
@@ -25,9 +26,17 @@ const WorkerHome = (props) => {
 
             const taskApproved = await axiosSecure.get(`/subApproved/${user.email}`);
             setTaskApprovedCount(taskApproved.data);
+            setLoading(false)
         }
         taskC();
-    },[])
+    }, [])
+        if (loading) {
+            return (
+                <div className="h-screen w-screen flex justify-center items-center">
+                    <span className="loading loading-spinner loading-lg  text-success"></span>
+                </div>
+            );
+        }
     return (
         <div>
             {/* state */}
@@ -57,10 +66,10 @@ const WorkerHome = (props) => {
 
             <div>
                 <div className="overflow-x-auto mt-10">
-                    <table className="table">
+                    <table className="table dark:text-background ">
                         {/* head */}
                         <thead>
-                            <tr>
+                            <tr className="dark:text-background">
                                 <th></th>
                                 <th>Buyer Name</th>
                                 <th>Task Title</th>

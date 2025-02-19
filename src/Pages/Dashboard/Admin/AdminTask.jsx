@@ -9,17 +9,27 @@ const AdminTask = (props) => {
     const [tasks, setTasks] = useState();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const [loading,setLoading] = useState(true);
+
     useEffect(() => {
         const fetchTasks = async () => {
             try {
                 const response = await axiosSecure.get("/tasks");
                 setTasks(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching withdrawals:", error);
             }
         };
         fetchTasks();
     }, []);
+           if (loading) {
+               return (
+                   <div className="h-screen w-screen flex justify-center items-center">
+                       <span className="loading loading-spinner loading-lg  text-success"></span>
+                   </div>
+               );
+           }
     // console.log(tasks);
     const handleDeleteTask = async (taskId) => {
         try {
@@ -56,10 +66,10 @@ const AdminTask = (props) => {
     return (
         <div>
             <div className="">
-                <table className="table">
+                <table className="table dark:text-background">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className="dark:text-background">
                             <th></th>
                             <th>Title</th>
                             <th className="">Task Detail</th>

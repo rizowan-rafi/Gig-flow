@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import logo from '../assets/Logo/footerLogo.png'
 import { FaFacebookSquare, FaGithubSquare } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
+import { FaHandHoldingDollar } from "react-icons/fa6";
 const Footer = (props) => {
     return (
-        <footer className="footer bg-[#ff5851] bg-opacity-70 text-neutral-content p-10">
+        <footer className="footer bg-primary dark:bg-accent bg-opacity-70 text-neutral-content p-10">
             <aside>
                 <p className="flex items-center gap-2">
-                    <img src={logo} className="w-[50px]" alt="" />
+                    <span className="text-4xl text-background "><FaHandHoldingDollar></FaHandHoldingDollar></span>
                     <h3 className="text-2xl font-bold text-white">GigFlow</h3>
                 </p>
                 <p className="text-white">

@@ -120,7 +120,7 @@ const CheckoutForm = ({ coin }) => {
                     },
                 }}
             />
-            <button className="btn  text-white bg-[#ff5851] mt-5" type="submit" disabled={!stripe || !clientSecret}>
+            <button className="btn  text-white bg-primary hover:bg-primary mt-5" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             {error && <p className="text-red-500">{error}</p>}

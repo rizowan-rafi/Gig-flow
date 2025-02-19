@@ -7,7 +7,8 @@ const WorkerSubmission = (props) => {
     const [items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const itemsPerPage = 2;
+    const [loading, setLoading] = useState(true);
+    const itemsPerPage = 5;
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
@@ -20,6 +21,7 @@ const WorkerSubmission = (props) => {
             if (response.data && Array.isArray(response.data.items)) {
                 setItems(response.data.items); 
                 setTotalPages(response.data.totalPages); 
+                setLoading(false);
             } else {
                 setItems([]); 
                 setTotalPages(0);
@@ -45,13 +47,21 @@ const WorkerSubmission = (props) => {
         }
     };
 
+               if (loading) {
+                   return (
+                       <div className="h-screen w-screen flex justify-center items-center">
+                           <span className="loading loading-spinner loading-lg  text-success"></span>
+                       </div>
+                   );
+               }
+
     return (
         <div>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className="dark:text-background">
                             <th></th>
                             <th>Task Title</th>
                             <th>Submission Detail</th>
@@ -61,7 +71,7 @@ const WorkerSubmission = (props) => {
                     <tbody>
                         {items && items.length > 0 ? (
                             items.map((item, index) => (
-                                <tr key={item._id} className="bg-base-200">
+                                <tr key={item._id} className="dark:text-background">
                                     <th>{index + 1}</th>
                                     <td>{item.task_title}</td>
                                     <td>{item.submission_details}</td>
@@ -81,7 +91,7 @@ const WorkerSubmission = (props) => {
 
             <div className="join mt-5 flex justify-center items-center">
                 <button
-                    className="join-item btn"
+                    className="join-item btn dark:bg-background"
                     onClick={handlePrevious}
                     disabled={currentPage === 1}
                 >

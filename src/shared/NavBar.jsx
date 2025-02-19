@@ -9,15 +9,23 @@ import { FaCoins } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useUser from "../hooks/useUser";
+import { FaHandHoldingDollar } from "react-icons/fa6";
 const NavBar = (props) => {
     const axiosPublic = useAxiosPublic();
     const { user, loading, signOutUser } = useAuth();
     // Show loading until the user data is available
     const [data, refetch, isPending] = useUser();
     // const [coin, setCoin] = useState(data?.coin);
+    const [isDark, setIsDark] = useState(
+        document.documentElement.classList.contains("dark")
+    );
     
     if (isPending || loading) {
-        return <p>loading....</p>
+        return (
+            <div className="h-screen w-screen flex justify-center items-center">
+                <span className="loading loading-spinner loading-lg  text-success"></span>
+            </div>
+        );
     }
 
 
@@ -28,30 +36,85 @@ const NavBar = (props) => {
     const links = user ? (
         <>
             <li>
-                <NavLink
+                <Link
                     to={"/"}
-                    className="font-semibold text-[#ff5851] text-[16px]"
+                    className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px]"
                 >
                     Home
-                </NavLink>
+                </Link>
             </li>
             <li>
-                <NavLink
+                <Link
                     to={`/dashboard/${data?.role}/home`}
-                    className="font-semibold text-[#ff5851] text-[16px]"
+                    className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px]"
                 >
                     DashBoard
-                </NavLink>
+                </Link>
             </li>
             <li>
-                <Link className="font-semibold text-[#ff5851] text-[16px] hello">
+                <Link
+                    to={`/alltasks`}
+                    className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px]"
+                >
+                    AllTasks
+                </Link>
+            </li>
+            <li>
+                <Link className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px] hello">
                     <FaCoins></FaCoins>({data?.coin})
                 </Link>
+            </li>
+            <li>
+                <Link
+                    to={`/dashboard/${data?.role}/profile`}
+                    className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px] hello"
+                >
+                    Profile
+                </Link>
+            </li>
+            <li>
+                <a
+                    href="#faq"
+                    className="font-semibold text-primary text-[16px] hover:bg-primary hover:text-teal-50"
+                >
+                    Faq
+                </a>
+            </li>
+            <li>
+                <a
+                    href="#test"
+                    className="font-semibold text-primary text-[16px] hover:bg-primary hover:text-teal-50"
+                >
+                    Reviews
+                </a>
             </li>
         </>
     ) : (
         <>
-            
+            <li>
+                <Link
+                    to={"/"}
+                    className="font-semibold text-primary hover:bg-primary hover:text-teal-50 text-[16px]"
+                >
+                    Home
+                </Link>
+            </li>
+            <li>
+                <a
+                    href="#faq"
+                    className="font-semibold text-primary text-[16px] hover:bg-primary hover:text-teal-50"
+                >
+                    Faq
+                </a>
+            </li>
+            <li>
+                <a
+                    href="#test"
+                    className="font-semibold text-primary text-[16px] hover:bg-primary hover:text-teal-50"
+                >
+                    Reviews
+                </a>
+            </li>
         </>
     );
 
@@ -66,8 +129,13 @@ const NavBar = (props) => {
             });
         });
     };
+
+    const handleDarkMode = () => { 
+        document.documentElement.classList.toggle('dark')
+        setIsDark((prev) => !prev);
+    }
     return (
-        <div className="navbar bg-base-100  lg:px-16 mx-auto">
+        <div className="navbar bg-opacity-60 bg-background dark:bg-text  lg:px-16 mx-auto">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div
@@ -97,8 +165,10 @@ const NavBar = (props) => {
                         {links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost md:text-xl">
-                    <img src={logo} alt="" />{" "}
+                <a className="btn btn-ghost md:text-xl text-primary">
+                    <span>
+                        <FaHandHoldingDollar></FaHandHoldingDollar>
+                    </span>
                     <span className="hidden md:block">GigFlow</span>
                 </a>
             </div>
@@ -114,36 +184,48 @@ const NavBar = (props) => {
                     />
                     <button
                         onClick={handleLogout}
-                        className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] "
+                        className="btn btn-outline text-primary hover:bg-primary hover:text-white hover:border-primary "
                     >
                         Logout
                     </button>
                     <a
                         href="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-isagi299"
-                        className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] "
+                        className="btn btn-outline text-primary hover:bg-primary hover:text-white hover:border-primary "
                     >
                         Join as <br />
                         Developer{" "}
                     </a>
+                    <button
+                        onClick={handleDarkMode}
+                        className="btn bg-primary text-background"
+                    >
+                        {isDark ? "Light Mode" : "Dark Mode"}
+                    </button>
                 </div>
             ) : (
                 <div className="navbar-end gap-3">
                     <Link
                         to={"/login"}
-                        className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] "
+                        className="btn btn-outline  text-primary hover:bg-primary hover:text-white hover:border-primary "
                     >
                         Login
                     </Link>
                     <Link
                         to={"/register"}
-                        className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] "
+                        className="btn btn-outline text-primary hover:bg-primary hover:text-white hover:border-primary "
                     >
                         SignUp
                     </Link>
-                    <a className="btn btn-outline text-[#ff5851] hover:bg-[#ff5851] hover:text-white hover:border-[#ff5851] ">
+                    <a className="btn btn-outline text-primary hover:bg-primary hover:text-white hover:border-primary ">
                         Join as <br />
                         Developer{" "}
                     </a>
+                    <button
+                        onClick={handleDarkMode}
+                        className="btn bg-primary text-background"
+                    >
+                        {isDark ? "Light Mode" : "Dark Mode"}
+                    </button>
                 </div>
             )}
         </div>

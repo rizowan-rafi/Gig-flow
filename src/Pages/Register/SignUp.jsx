@@ -85,28 +85,28 @@ const SignUp = (props) => {
     // console.log(watch("password"));
 
     return (
-        <div className="my-10 lg:flex items-center flex-row-reverse">
+        <div className="py-10 lg:flex items-center flex-row-reverse bg-background dark:bg-black dark:text-background text-text">
             <div className="w-[50%] hidden lg:block">
                 <Lottie animationData={registerLogo} loop={true}></Lottie>
             </div>
             <div className="card bg-base-100 items-center justify-center w-[90%] mx-auto lg:w-[50%] max-w-xl  shadow-xl">
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="card-body w-full"
+                    className="card-body w-full dark:bg-text"
                 >
                     <img className="w-[75px]" src={logo} alt="" />
                     <h3 className="text-2xl font-bold">
-                        <span className="text-[#ff5851]">Register</span> Your
+                        <span className="text-primary">Register</span> Your
                         Account
                     </h3>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Name</span>
+                            <span className="label-text dark:text-background">Name</span>
                         </label>
                         <input
                             type="text"
                             placeholder="Input Your Name"
-                            className="input input-bordered"
+                            className="input input-bordered  dark:text-text"
                             {...register("name", { required: true })}
                             required
                         />
@@ -118,12 +118,12 @@ const SignUp = (props) => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="label-text dark:text-background">Email</span>
                         </label>
                         <input
                             type="email"
                             placeholder="Input A Valid Email"
-                            className="input input-bordered"
+                            className="input input-bordered dark:text-text"
                             {...register("email", { required: true })}
                             required
                         />
@@ -135,11 +135,11 @@ const SignUp = (props) => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Photo URL</span>
+                            <span className="label-text dark:text-background">Photo URL</span>
                         </label>
                         <input
                             type="file"
-                            className="file-input file-input-bordered file-input-error w-full max-w-xs"
+                            className="file-input file-input-bordered file-input-success w-full max-w-xs"
                             {...register("image", { required: true })}
                         />
                         {errors.image?.type === "required" && (
@@ -150,12 +150,12 @@ const SignUp = (props) => {
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="label-text dark:text-background">Password</span>
                         </label>
                         <input
                             type="password"
                             placeholder="Input Password"
-                            className="input input-bordered"
+                            className="input input-bordered dark:text-text"
                             required
                             {...register("password", {
                                 required: true,
@@ -174,7 +174,7 @@ const SignUp = (props) => {
                     </div>
                     <div className="form-control">
                         {/* <label className="label">
-                            <span className="label-text">Input Your Role</span>
+                            <span className="label-text dark:text-background">Input Your Role</span>
                         </label> */}
 
                         <select
@@ -183,7 +183,7 @@ const SignUp = (props) => {
                                 validate: (formValue) =>
                                     formValue !== "default",
                             })}
-                            className="select select-error w-full max-w-xs"
+                            className="select select-error w-full max-w-xs dark:text-text"
                             defaultValue={"default"}
                         >
                             <option disabled value={"default"}>
@@ -204,7 +204,7 @@ const SignUp = (props) => {
                         )}
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn  bg-[#ff5851] text-white">
+                        <button className="btn  bg-primary text-white">
                             SignUp
                         </button>
                     </div>
@@ -212,7 +212,7 @@ const SignUp = (props) => {
                         Already Have Account?{" "}
                         <Link
                             to={"/login"}
-                            className="text-[#ff5851] font-semibold text-[16px]"
+                            className="text-primary font-semibold text-[16px]"
                         >
                             Login
                         </Link>

@@ -8,7 +8,7 @@ body {
 }
 
 body {
-  background: #eee;
+  background: #f6f9f6;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #000;
@@ -24,7 +24,8 @@ body {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  background: #92e486;
+  padding-top:10px;
 
   /* Center slide text vertically */
   display: flex;

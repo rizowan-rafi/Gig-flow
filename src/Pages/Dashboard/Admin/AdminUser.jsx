@@ -9,18 +9,27 @@ const AdminUser = (props) => {
     const [users, setUsers] = useState();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axiosSecure.get("/users");
                 setUsers(response.data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching withdrawals:", error);
             }
         };
         fetchUsers();
     }, []);
+           if (loading) {
+               return (
+                   <div className="h-screen w-screen flex justify-center items-center">
+                       <span className="loading loading-spinner loading-lg  text-success"></span>
+                   </div>
+               );
+           }
 
     const handleRole = (role, urole, uid) => {
         if (role === urole) {
@@ -86,21 +95,21 @@ const AdminUser = (props) => {
     };
     return (
         <div>
-            <h2>Admin User</h2>
+            <h2 className="text-4xl font-bold text-primary p-4">Admin User</h2>
             <div className="">
                 <div className="overflow-x-auto">
                     <div className="overflow-x-auto">
-                        <table className="table">
+                        <table className="table  dark:text-background">
                             {/* head */}
                             <thead>
-                                <tr>
+                                <tr className="dark:text-background">
                                     <th>Name</th>
-                                    <th>Job</th>
-                                    <th>Favorite Color</th>
+                                    <th>Coin</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className="">
                                 {users?.map((user) => (
                                     <tr key={user._id}>
                                         <td>
@@ -136,11 +145,11 @@ const AdminUser = (props) => {
                                         </td>
                                         <th>
                                             <button className="">
-                                                <div className="dropdown">
+                                                <div className="dropdown ">
                                                     <div
                                                         tabIndex={0}
                                                         role="button"
-                                                        className="btn m-1"
+                                                        className="btn m-1 bg-primary text-background"
                                                     >
                                                         {user.role}
                                                     </div>

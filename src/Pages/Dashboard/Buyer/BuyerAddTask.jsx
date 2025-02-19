@@ -77,10 +77,10 @@ const BuyerAddTask = (props) => {
     };
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Task Title</span>
+                        <span className="label-text text-text dark:text-background">Task Title</span>
                     </label>
                     <input
                         type="text"
@@ -92,7 +92,7 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Task Detail</span>
+                        <span className="label-text text-text dark:text-background">Task Detail</span>
                     </label>
                     <textarea
                         {...register("taskDetail", { required: true })}
@@ -103,7 +103,7 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Required Worker</span>
+                        <span className="label-text text-text dark:text-background">Required Worker</span>
                     </label>
                     <input
                         type="text"
@@ -115,7 +115,7 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Payable Amount</span>
+                        <span className="label-text text-text dark:text-background">Payable Amount</span>
                     </label>
                     <input
                         type="text"
@@ -127,7 +127,7 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Completion Data</span>
+                        <span className="label-text text-text dark:text-background">Completion Data</span>
                     </label>
                     <input
                         type="date"
@@ -139,7 +139,7 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Submit Info</span>
+                        <span className="label-text text-text dark:text-background">Submit Info</span>
                     </label>
                     <input
                         type="text"
@@ -151,17 +151,17 @@ const BuyerAddTask = (props) => {
                 </div>
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text">Image URL</span>
+                        <span className="label-text text-text dark:text-background">Image URL</span>
                     </label>
                     <input
                         type="file"
-                        className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                        className="file-input file-input-bordered file-input-success w-full  max-w-xs"
                         required
                         {...register("buyerImage", { required: true })}
                     />
                 </div>
                 <div className="form-control mt-6">
-                    <button className="btn btn-primary">Add Task</button>
+                    <button className="btn btn-primary bg-accent text-background">Add Task</button>
                 </div>
             </form>
         </div>

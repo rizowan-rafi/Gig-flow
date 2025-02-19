@@ -24,10 +24,10 @@ const Testimonial = (props) => {
     const myStyles = {
         itemShapes: CustomStar,
         itemStrokeWidth: 2,
-        activeFillColor: "#ff5851",
-        activeStrokeColor: "#ff5851",
+        activeFillColor: '#59ba4a',
+        activeStrokeColor: '#59ba4a',
         inactiveFillColor: "white",
-        inactiveStrokeColor: "#ff5851",
+        inactiveStrokeColor: '#59ba4a',
     };
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0); // Initial value
@@ -38,9 +38,16 @@ const Testimonial = (props) => {
     }, []);
 
     return (
-        <div className="w-[90%] mx-auto">
-            <h1 className="text-3xl font-bold text-[#ff5851] mt-20">Testimonial</h1>
-            <div className="py-5">
+        <div className="px-10 pb-20 bg-background dark:bg-text">
+            <div className="mb-5  dark:text-background">
+                <h1 className="text-3xl text-primary font-semibold  text-center">
+                    Testimonial
+                </h1>
+                <p className="text-center text-xl lg:w-1/3  mx-auto">
+                    Real Experiences, Real Success – See What Our Users Say!
+                </p>
+            </div>
+            <div className="bg-black">
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -53,10 +60,10 @@ const Testimonial = (props) => {
                     }}
                     navigation={true}
                     modules={[Autoplay, Pagination, Navigation]}
-                    className="mySwiper"
+                    className="mySwiper "
                 >
                     {reviews.map((r) => (
-                        <SwiperSlide className="flex gap-4 flex-col justify-center items-center py-16">
+                        <SwiperSlide className="flex gap-4 flex-col justify-center items-center pb-8">
                             <div>
                                 <img src={r.image} alt="" />
                             </div>
@@ -72,7 +79,7 @@ const Testimonial = (props) => {
                                 <FaQuoteLeft />
                             </h3>
                             <p className="w-[80%] mx-auto">{r.details}</p>
-                            <p className="text-xl text-[#ff5851] font-semibold">
+                            <p className="text-xl text-primary font-semibold">
                                 {r.name}
                             </p>
                         </SwiperSlide>

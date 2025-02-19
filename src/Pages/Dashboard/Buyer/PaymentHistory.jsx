@@ -5,27 +5,36 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PaymentHistory = (props) => {
     const [payment, setPayment] = useState('');
+    const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     useEffect(() => { 
         axiosSecure.get("/payments").then((response) => {
             setPayment(response.data);
+            setLoading(false);
         }).catch((error) => {
             // console.log(error);
         });
-    },[])
+    }, [])
+       if (loading) {
+           return (
+               <div className="h-screen w-screen flex justify-center items-center">
+                   <span className="loading loading-spinner loading-lg  text-success"></span>
+               </div>
+           );
+       }
     return (
         <div>
             <table className="table table-sm">
                 <thead>
-                    <tr>
+                    <tr className="text-text dark:text-background">
                         <th className="hidden lg:table-cell"></th>
                         <th>TranId</th>
                         <th>Amount</th>
                         <th className="hidden lg:table-cell">Date</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-text dark:text-background">
                     {(payment.length > 0 &&
                         payment.map((item, index) => (
                             <tr key={index}>

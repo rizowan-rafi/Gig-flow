@@ -25,13 +25,19 @@ const Acknowledge = (props) => {
         });
     }, []);
     return (
-        <div className="w-[90%] mx-auto">
-            <h1 className="text-3xl text-[#ff5851] font-semibold py-5 mb-5">
-                What Makes us the Best?
-            </h1>
-            <div className="flex flex-col lg:flex-row gap-3">
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-[#ff5851]">
-                    <p className="text-[#ff5851] text-5xl">
+        <div className="px-10 pb-20 bg-background dark:bg-text">
+            <div className="mb-5 dark:text-background">
+                <h1 className="text-3xl text-primary font-semibold  text-center">
+                    What Makes us the Best?
+                </h1>
+                <p className="text-center text-xl lg:w-1/3  mx-auto">
+                    Empowering Earners, Connecting Buyers – A Thriving
+                    Micro-Earning Community!
+                </p>
+            </div>
+            <div className="flex flex-col lg:flex-row gap-3 dark:text-background">
+                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
+                    <p className="text-primary text-5xl">
                         <FaUser></FaUser>
                     </p>
                     <h2 className="text-xl font-semibold">
@@ -42,8 +48,8 @@ const Acknowledge = (props) => {
                         varying needs and interests.
                     </p>
                 </div>
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-[#ff5851]">
-                    <p className="text-[#ff5851] text-5xl">
+                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
+                    <p className="text-primary text-5xl">
                         <GrUserWorker></GrUserWorker>
                     </p>
 
@@ -55,8 +61,8 @@ const Acknowledge = (props) => {
                         with your tasks.
                     </p>
                 </div>
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-[#ff5851]">
-                    <p className="text-[#ff5851] text-5xl">
+                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
+                    <p className="text-primary text-5xl">
                         <FaUserTie></FaUserTie>
                     </p>
 
@@ -68,8 +74,8 @@ const Acknowledge = (props) => {
                         perfect tasks.
                     </p>
                 </div>
-                <div className="flex flex-col gap-2 justify-center border-r-2 border-[#ff5851] lg:border-r-0 p-3 items-center">
-                    <p className="text-[#ff5851] text-5xl">
+                <div className="flex flex-col gap-2 justify-center border-r-2 border-primary lg:border-r-0 p-3 items-center">
+                    <p className="text-primary text-5xl">
                         <FaTasks></FaTasks>
                     </p>
 
