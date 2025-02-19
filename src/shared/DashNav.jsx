@@ -130,7 +130,7 @@ const DashNav = (props) => {
                 {/* {links} */}
                 <a>
                     <img
-                        className="w-9 h-9 rounded-full "
+                        className="w-9 h-9 rounded-full"
                         src={data?.image}
                         alt=""
                     />
