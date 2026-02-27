@@ -1,97 +1,113 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { MdVerifiedUser } from "react-icons/md";
 import { FaTasks, FaUser, FaUserTie } from "react-icons/fa";
 import { GrUserWorker } from "react-icons/gr";
 
-const Acknowledge = (props) => {
+const Acknowledge = () => {
     const axiosPublic = useAxiosPublic();
-    const [totalUser, setTotalUser] = useState(0);
-    const [totalWorkers, setTotalWorkers] = useState(0);
-    const [totalBuyers, setTotalBuyers] = useState(0);
-    const [totalTask, setTotalTask] = useState(0);
-    useEffect(() => {
-        axiosPublic.get("/userCount").then((res) => {
-            setTotalUser(res.data.userCount);
-        });
-        axiosPublic.get("/wcCount").then((res) => {
-            setTotalWorkers(res.data.workerCount);
-            setTotalBuyers(res.data.buyerCount);
-        });
+    const [stats, setStats] = useState({
+        totalUser: 0,
+        totalWorkers: 0,
+        totalBuyers: 0,
+        totalTask: 0,
+    });
 
-        axiosPublic.get("/taskCount").then((res) => {
-            setTotalTask(res.data.taskCount);
-        });
-    }, []);
+    useEffect(() => {
+        // Optimized to handle multiple requests cleanly
+        const fetchStats = async () => {
+            try {
+                const [userRes, wcRes, taskRes] = await Promise.all([
+                    axiosPublic.get("/userCount"),
+                    axiosPublic.get("/wcCount"),
+                    axiosPublic.get("/taskCount"),
+                ]);
+
+                setStats({
+                    totalUser: userRes.data.userCount,
+                    totalWorkers: wcRes.data.workerCount,
+                    totalBuyers: wcRes.data.buyerCount,
+                    totalTask: taskRes.data.taskCount,
+                });
+            } catch (err) {
+                console.error("Error fetching stats:", err);
+            }
+        };
+        fetchStats();
+    }, [axiosPublic]);
+
+    const statItems = [
+        {
+            label: "Total Users",
+            value: stats.totalUser,
+            icon: <FaUser />,
+            desc: "Diverse community of users with varying interests.",
+            color: "bg-blue-50 text-blue-600",
+        },
+        {
+            label: "Total Workers",
+            value: stats.totalWorkers,
+            icon: <GrUserWorker />,
+            desc: "Experienced workers ready to handle your tasks.",
+            color: "bg-green-50 text-green-600",
+        },
+        {
+            label: "Total Buyers",
+            value: stats.totalBuyers,
+            icon: <FaUserTie />,
+            desc: "Active buyers looking for the perfect results.",
+            color: "bg-purple-50 text-purple-600",
+        },
+        {
+            label: "Total Tasks",
+            value: stats.totalTask,
+            icon: <FaTasks />,
+            desc: "Vast selection of tasks to build your portfolio.",
+            color: "bg-orange-50 text-orange-600",
+        },
+    ];
+
     return (
-        <div className="px-10 pb-20 bg-background dark:bg-text">
-            <div className="mb-5 dark:text-background">
-                <h1 className="text-3xl text-primary font-semibold  text-center">
-                    What Makes us the Best?
-                </h1>
-                <p className="text-center text-xl lg:w-1/3  mx-auto">
+        <section className="py-24 px-6 lg:px-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+            <div className="max-w-3xl mx-auto text-center mb-16">
+                <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                    Our Impact in{" "}
+                    <span className="text-[#59ba4a]">Numbers</span>
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-400">
                     Empowering Earners, Connecting Buyers – A Thriving
                     Micro-Earning Community!
                 </p>
+                <div className="w-20 h-1.5 bg-[#59ba4a] mx-auto mt-6 rounded-full"></div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-3 dark:text-background">
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
-                    <p className="text-primary text-5xl">
-                        <FaUser></FaUser>
-                    </p>
-                    <h2 className="text-xl font-semibold">
-                        Total Users: {totalUser}
-                    </h2>
-                    <p className="text-center">
-                        We proudly serve a diverse community of users with
-                        varying needs and interests.
-                    </p>
-                </div>
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
-                    <p className="text-primary text-5xl">
-                        <GrUserWorker></GrUserWorker>
-                    </p>
 
-                    <h2 className="text-xl font-semibold">
-                        Total Workers: {totalWorkers}
-                    </h2>
-                    <p className="text-center">
-                        We have a strong team of experienced workers to help you
-                        with your tasks.
-                    </p>
-                </div>
-                <div className="flex flex-col gap-2 justify-center p-3 items-center border-r-2 border-primary">
-                    <p className="text-primary text-5xl">
-                        <FaUserTie></FaUserTie>
-                    </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {statItems.map((item, idx) => (
+                    <div
+                        key={idx}
+                        className="group p-8 bg-gray-50 dark:bg-gray-800 rounded-3xl border border-transparent hover:border-[#59ba4a] hover:bg-white dark:hover:bg-gray-750 transition-all duration-300 shadow-sm hover:shadow-xl text-center"
+                    >
+                        <div
+                            className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 text-3xl transition-transform duration-500 group-hover:rotate-[360deg] ${item.color} dark:bg-opacity-10`}
+                        >
+                            {item.icon}
+                        </div>
 
-                    <h2 className="text-xl font-semibold">
-                        Total Buyers: {totalBuyers}
-                    </h2>
-                    <p className="text-center">
-                        We have a wide range of buyers to help you find the
-                        perfect tasks.
-                    </p>
-                </div>
-                <div className="flex flex-col gap-2 justify-center border-r-2 border-primary lg:border-r-0 p-3 items-center">
-                    <p className="text-primary text-5xl">
-                        <FaTasks></FaTasks>
-                    </p>
-
-                    <h2 className="text-xl font-semibold">
-                        Total Tasks: {totalTask}
-                    </h2>
-                    <p className="text-center">
-                        We have a vast selection of tasks to help you earn money
-                        and build your portfolio.
-                    </p>
-                </div>
+                        <div className="space-y-2">
+                            <h3 className="text-4xl font-black text-gray-900 dark:text-white">
+                                {item.value.toLocaleString()}
+                            </h3>
+                            <p className="text-sm font-bold uppercase tracking-widest text-[#59ba4a]">
+                                {item.label}
+                            </p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed pt-2">
+                                {item.desc}
+                            </p>
+                        </div>
+                    </div>
+                ))}
             </div>
-        </div>
+        </section>
     );
 };
-
-Acknowledge.propTypes = {};
 
 export default Acknowledge;

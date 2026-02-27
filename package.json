@@ -29,7 +29,7 @@
     "recharts": "^2.15.1",
     "sort-by": "^1.2.0",
     "stripe": "^17.5.0",
-    "sweetalert2": "^11.15.10",
+    "sweetalert2": "^11.21.0",
     "swiper": "^11.2.1"
   },
   "devDependencies": {

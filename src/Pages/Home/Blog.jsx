@@ -1,63 +1,77 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendarAlt, FaArrowRight } from "react-icons/fa";
 
-const Blog = (props) => {
+const Blog = () => {
     const [blogs, setBlogs] = useState([]);
+
     useEffect(() => {
-        fetch("blogs.json",)
-            .then((response) => response.json())
+        fetch("blogs.json")
+            .then((res) => res.json())
             .then((data) => setBlogs(data));
     }, []);
-    // console.log(blogs)
+
     return (
-        <div className="pb-20 bg-background dark:bg-text">
-            <div className="mx-10">
-                <h2 className="text-3xl text-primary font-semibold  text-center">
-                    Blogs <br />
+        <section className="py-24 px-6 lg:px-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+            {/* Header Section */}
+            <div className="max-w-3xl mx-auto text-center mb-16">
+                <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                    Latest <span className="text-[#59ba4a]">Insights</span>
                 </h2>
-                <p className="text-center text-xl lg:w-1/3 mx-auto dark:text-background">
-                    Latest tips, strategies, and insights to help you maximize
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                    Tips, strategies, and expert insights to help you maximize
                     your online earnings.
                 </p>
-                <div className="grid lg:grid-cols-3 grid-cols-1 pt-5 justify-center items-center gap-5 lg:w-[80%] mx-auto">
-                    {blogs.map((blog) => (
-                        <div className=" rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800">
+                <div className="w-20 h-1.5 bg-[#59ba4a] mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            {/* Grid Container */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+                {blogs.map((blog, idx) => (
+                    <div
+                        key={idx}
+                        className="group flex flex-col bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 hover:-translate-y-2"
+                    >
+                        {/* Image Container */}
+                        <div className="relative aspect-video overflow-hidden">
                             <img
                                 src={blog.image}
-                                alt=""
-                                className=" object-center w-full rounded-t-md h-72 dark:bg-gray-500"
+                                alt={blog.title}
+                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                             />
-                            <div className="flex flex-col justify-between p-6 space-y-8">
-                                <div className="flex items-center text-primary font-bold gap-2">
-                                    <span><FaCalendar></FaCalendar></span>
-                                    <span>{blog.date}</span> |
-                                    <span>{ blog.category}</span>
-                                </div>
+                            {/* Category Badge */}
+                            <div className="absolute top-4 left-4 bg-[#59ba4a] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-wider">
+                                {blog.category}
+                            </div>
+                        </div>
 
-                                <div className="space-y-2">
-                                    <h2 className="text-2xl font-semibold tracking-wide">
-                                        {blog.title}
-                                    </h2>
-                                    <p className="dark:text-gray-800">
-                                        {blog.description}
-                                    </p>
-                                </div>
-                                <button
-                                    type="button"
-                                    className="flex items-center bg-primary text-background justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-accent dark:text-gray-50"
-                                >
-                                    Read more
+                        {/* Content Section */}
+                        <div className="p-8 flex flex-col flex-grow">
+                            <div className="flex items-center gap-2 text-gray-400 dark:text-gray-500 text-sm mb-4">
+                                <FaCalendarAlt className="text-[#59ba4a]" />
+                                <span className="font-medium">{blog.date}</span>
+                            </div>
+
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 leading-tight group-hover:text-[#59ba4a] transition-colors">
+                                {blog.title}
+                            </h3>
+
+                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 line-clamp-3">
+                                {blog.description}
+                            </p>
+
+                            {/* Push button to bottom */}
+                            <div className="mt-auto">
+                                <button className="inline-flex items-center gap-2 text-[#59ba4a] font-bold group/btn">
+                                    Read Article
+                                    <FaArrowRight className="transform group-hover/btn:translate-x-2 transition-transform" />
                                 </button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
-        </div>
+        </section>
     );
 };
-
-Blog.propTypes = {};
 
 export default Blog;

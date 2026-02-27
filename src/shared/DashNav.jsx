@@ -1,171 +1,156 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import useUser from "../hooks/useUser";
-import logo from "../assets/Logo/logo.png";
-import { FaAddressBook, FaCoins } from "react-icons/fa";
-import { IoIosNotifications, IoIosNotificationsOutline } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
-import useAxiosPublic from "../hooks/useAxiosPublic";
+import { FaCoins, FaMoon, FaSun } from "react-icons/fa";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { FaHandHoldingDollar } from "react-icons/fa6";
+import useUser from "../hooks/useUser";
 
-const DashNav = (props) => {
-    const [data, refetch, isPending] = useUser();
-    const [notifications, setNotifications] = useState([]);
-    const axiosPublic = useAxiosPublic();
+const DashNav = () => {
+    const [data] = useUser();
     const axiosSecure = useAxiosSecure();
-        const [isDark, setIsDark] = useState(
-            document.documentElement.classList.contains("dark")
-        );
-    // if (isPending) {
-    //     return <p>loading....</p>;
-    // }
-    // console.log(data);
     const location = useLocation();
-    // console.log(location.pathname);
+    const [isDark, setIsDark] = useState(
+        document.documentElement.classList.contains("dark"),
+    );
 
-    const fetchNotifications = async () => {
-        const res = await axiosSecure.get(
-            `/notifications?route=${location.pathname}&email=${data.email}`
-        );
-        return res.data;
-    };
-
-    const { data: note } = useQuery({
-        queryKey: ["notifications", location.pathname, data?.email], // Ensure `data` refers to your props/state, not from useQuery
-        queryFn: fetchNotifications,
+    const { data: notifications = [] } = useQuery({
+        queryKey: ["notifications", location.pathname, data?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(
+                `/notifications?route=${location.pathname}&email=${data.email}`,
+            );
+            return res.data;
+        },
         enabled: !!data?.email,
     });
-    useEffect(() => {
-        if (note) {
-            setNotifications(note);
-        }
-    }, [note]);
 
-    const links = (
-        <>
-            <li>
-                <Link
-                    className="font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                    to={"/"}
-                >
-                    Home
-                </Link>
-            </li>
-            <li>
-                <a
-                    className="font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                >
-                    {data?.name}
-                </a>
-            </li>
-
-            <li>
-                <a
-                    className="font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                >
-                    {data?.role}
-                </a>
-            </li>
-            <li>
-                <a
-                    className="font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                >
-                    <FaCoins></FaCoins>({data?.coin})
-                </a>
-            </li>
-        </>
-    );
     const handleDarkMode = () => {
         document.documentElement.classList.toggle("dark");
-        setIsDark((prev) => !prev);
+        setIsDark(!isDark);
     };
+
     return (
-        <div className="navbar bg-opacity-60 bg-background dark:bg-text  lg:px-16 mx-auto">
-            <div className="navbar-start">
-                <div className="dropdown">
-                    <div
-                        tabIndex={0}
-                        role="button"
-                        className="btn btn-ghost lg:hidden"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                            />
-                        </svg>
-                    </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                    >
-                        {links}
+        <nav className="sticky top-0 z-[50] w-full bg-white/70 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-100 dark:border-gray-800 transition-all ">
+            <div className="navbar max-w-[1600px] mx-auto lg:px-10">
+                {/* Brand Section */}
+                <div className="navbar-start">
+                    <Link to="/" className="flex items-center gap-2 group">
+                        <div className="bg-[#59ba4a] p-2 rounded-xl text-white shadow-lg group-hover:rotate-12 transition-transform">
+                            <FaHandHoldingDollar size={20} />
+                        </div>
+                        <span className="text-xl font-black text-gray-900 dark:text-white hidden sm:block">
+                            Gig<span className="text-[#59ba4a]">Flow</span>
+                        </span>
+                    </Link>
+                </div>
+
+                {/* Center: Essential Navigation */}
+                <div className="navbar-center hidden md:flex">
+                    <ul className="flex items-center gap-6">
+                        <li>
+                            <Link
+                                to="/"
+                                className="text-sm font-bold text-gray-500 hover:text-[#59ba4a] transition-colors uppercase tracking-widest"
+                            >
+                                Home
+                            </Link>
+                        </li>
+                        <div className="h-4 w-[1px] bg-gray-200 dark:bg-gray-700"></div>
+                        <li className="flex items-center gap-2">
+                            <span className="text-xs font-bold px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 uppercase">
+                                {data?.role}
+                            </span>
+                            <span className="text-sm font-bold text-gray-900 dark:text-white">
+                                {data?.name}
+                            </span>
+                        </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-primary md:text-xl">
-                    <span>
-                        <FaHandHoldingDollar></FaHandHoldingDollar>
-                    </span>
-                    <span className="hidden md:block">GigFlow</span>
-                </a>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">{links}</ul>
-            </div>
-            <div className="navbar-end gap-4">
-                {/* {links} */}
-                <a>
-                    <img
-                        className="w-9 h-9 rounded-full"
-                        src={data?.image}
-                        alt=""
-                    />
-                </a>
-                <a className=" text-2xl">
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn m-1 bg-primary text-background">
-                            <IoIosNotificationsOutline></IoIosNotificationsOutline>
-                        </div>
 
+                {/* Right: Actions & User Info */}
+                <div className="navbar-end gap-2 md:gap-5">
+                    {/* Coin Balance Pill */}
+                    <div className="flex items-center gap-2 bg-green-50 dark:bg-green-900/20 px-4 py-2 rounded-full border border-green-100 dark:border-green-800">
+                        <FaCoins className="text-[#59ba4a] animate-bounce" />
+                        <span className="font-bold text-[#59ba4a] text-sm md:text-base">
+                            {data?.coin?.toLocaleString() || 0}
+                        </span>
+                    </div>
+
+                    {/* Notifications */}
+                    <div className="dropdown dropdown-end">
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-ghost btn-circle bg-gray-50 dark:bg-gray-800 border-none"
+                        >
+                            <div className="indicator">
+                                <IoIosNotificationsOutline
+                                    size={26}
+                                    className="text-gray-600 dark:text-gray-300"
+                                />
+                                {notifications.length > 0 && (
+                                    <span className="badge badge-xs badge-primary indicator-item ring-2 ring-white dark:ring-gray-900"></span>
+                                )}
+                            </div>
+
+                        </div>
                         <ul
                             tabIndex={0}
-                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+                            className="dropdown-content menu p-4 shadow-2xl bg-white dark:bg-gray-800 rounded-2xl w-72 mt-4 border border-gray-100 dark:border-gray-700"
                         >
-                            {notifications?.map((n, idx) => (
-                                <li key={n._id}>
-                                    <a>
-                                        {idx + 1}. {n.message}
-                                    </a>
-                                </li>
-                            ))}
+                            <h3 className="font-black text-xs uppercase text-gray-400 mb-3 px-2">
+                                Recent Notifications
+                            </h3>
+                            {notifications.length > 0 ? (
+                                notifications.slice(0, 5).map((n, idx) => (
+                                    <li
+                                        key={n._id}
+                                        className="border-b border-gray-50 dark:border-gray-700 last:border-none"
+                                    >
+                                        <a className="py-3 px-2 text-sm leading-tight hover:bg-[#59ba4a]/10">
+                                            <span className="font-bold text-[#59ba4a] mr-2">
+                                                {idx + 1}.
+                                            </span>
+                                            {n.message}
+                                        </a>
+                                    </li>
+                                ))
+                            ) : (
+                                <p className="text-center text-xs py-4 text-gray-400 italic">
+                                    No new notifications
+                                </p>
+                            )}
                         </ul>
                     </div>
-                </a>
-                <button
-                    onClick={handleDarkMode}
-                    className="btn bg-primary text-background"
-                >
-                    {isDark ? "Light Mode" : "Dark Mode"}
-                </button>
+
+                    {/* Theme Toggle */}
+                    <button
+                        onClick={handleDarkMode}
+                        className="btn btn-ghost btn-circle bg-gray-50 dark:bg-gray-800 border-none text-gray-600 dark:text-yellow-400 transition-all hover:scale-110"
+                    >
+                        {isDark ? <FaSun size={18} /> : <FaMoon size={18} />}
+                    </button>
+
+                    {/* Profile Avatar */}
+                    <Link
+                        to={`/dashboard/${data?.role}/profile`}
+                        className="avatar"
+                    >
+                        <div className="w-10 h-10 rounded-2xl ring-2 ring-[#59ba4a] ring-offset-2 ring-offset-white dark:ring-offset-gray-900 overflow-hidden">
+                            <img
+                                src={data?.image}
+                                alt="User"
+                                className="object-cover"
+                            />
+                        </div>
+                    </Link>
+                </div>
             </div>
-        </div>
+        </nav>
     );
 };
-
-DashNav.propTypes = {};
 
 export default DashNav;

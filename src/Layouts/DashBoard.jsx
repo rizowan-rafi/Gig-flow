@@ -11,8 +11,8 @@ const DashBoard = (props) => {
     // console.log(data?.coin);
 
     return (
-        <div className="bg-background">
-            <nav className="">
+        <div className="bg-background w-full dark:bg-text min-h-screen">
+            <nav className="w-full mx-auto ">
                 <DashNav></DashNav>
             </nav>
             <main className="flex gap-10 dark:bg-text">
@@ -41,7 +41,7 @@ const DashBoard = (props) => {
                                 ></label>
 
                                 {data?.role === "Buyer" ? (
-                                    <ul className="menu dark:bg-text  text-base-content   min-h-full lg:w-52 p-4">
+                                    <ul className="menu dark:bg-text bg-base-200  text-base-content   min-h-full lg:w-52 p-4">
                                         {/* Sidebar content here */}
                                         <li>
                                             <NavLink
@@ -52,15 +52,7 @@ const DashBoard = (props) => {
                                                 Home
                                             </NavLink>
                                         </li>
-                                        <li>
-                                            <NavLink
-                                                className="hover:font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                                                to={`/dashboard/overview`}
-                                            >
-                                                Overview
-                                            </NavLink>
-                                        </li>
+
                                         <li>
                                             <NavLink
                                                 className="hover:font-semibold text-primary hover:bg-primary
@@ -119,15 +111,7 @@ const DashBoard = (props) => {
                                                 Home
                                             </NavLink>
                                         </li>
-                                        <li>
-                                            <NavLink
-                                                className="hover:font-semibold text-primary hover:bg-primary
-                    hover:text-teal-50 text-[16px]"
-                                                to={`/dashboard/overview`}
-                                            >
-                                                Overview
-                                            </NavLink>
-                                        </li>
+
                                         <li>
                                             <NavLink
                                                 className="hover:font-semibold text-primary hover:bg-primary
